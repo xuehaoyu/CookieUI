@@ -2,15 +2,14 @@
   "name": "cookie-xhy-ui",
   "version": "1.0.0",
   "description": "基于react的组件库",
-  "main": "index.js",
-  "module": "es/index.js",
+  "main": "lib/index.js",
+  "module": "lib/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build:dev": "cross-env NODE_ENV=development webpack",
     "build:prod": "cross-env NODE_ENV=production webpack",
     "build": "cross-env NODE_ENV=production webpack",
-    "build:tsc": "tsc -p tsconfig.build.json --target ES5 --outDir lib",
-    "build:es": "cpr lib/styles -o && cpr lib/assets -o"
+    "build:tsc": "tsc -p tsconfig.build.json --target ES5 --outDir lib"
   },
   "repository": {
     "type": "git",
