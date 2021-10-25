@@ -1,6 +1,6 @@
 {
   "name": "cookie-xhy-ui",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "基于react的组件库",
   "main": "lib/index.js",
   "module": "lib/index.js",
