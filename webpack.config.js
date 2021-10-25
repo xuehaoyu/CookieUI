@@ -1,26 +1,26 @@
-const path = require("path");
-const webpack = require("webpack");
-const MiniCssExtractPlugin = require("mini-css-extract-plugin");
-const TerserJSPlugin = require("terser-webpack-plugin");
-const OptimizeCSSAssetsPlugin = require("optimize-css-assets-webpack-plugin");
+const path = require('path')
+const webpack = require('webpack')
+const MiniCssExtractPlugin = require('mini-css-extract-plugin')
+const TerserJSPlugin = require('terser-webpack-plugin')
+const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin')
 
-const devMode = process.env.NODE_ENV !== "production";
-const pkg = require("./package.json");
+const devMode = process.env.NODE_ENV !== 'production'
+const pkg = require('./package.json')
 
 module.exports = {
-  mode: devMode ? "development" : "production",
-  devtool: devMode ? "inline-source-map" : "hidden-source-map",
-  entry: path.resolve(__dirname, "./components/index.ts"),
+  mode: devMode ? 'development' : 'production',
+  devtool: devMode ? 'inline-source-map' : 'hidden-source-map',
+  entry: path.resolve(__dirname, './components/index.ts'),
   output: {
-    path: path.resolve(__dirname, "./dist"),
-    filename: devMode ? "cookie.js" : "cookie.min.js",
-    library: "CookieUI",
-    libraryTarget: "umd",
+    path: path.resolve(__dirname, './dist'),
+    filename: devMode ? 'cookie.js' : 'cookie.min.js',
+    library: 'CookieUI',
+    libraryTarget: 'umd'
   },
   resolve: {
     // Add `.ts` and `.tsx` as a resolvable extension.
-    extensions: [".ts", ".tsx", ".js"],
-    alias: {},
+    extensions: ['.ts', '.tsx', '.js'],
+    alias: {}
   },
 
   module: {
@@ -29,60 +29,60 @@ module.exports = {
       {
         test: /\.tsx?$/,
         use: [
-          "babel-loader?cacheDirectory",
+          'babel-loader?cacheDirectory',
           {
-            loader: "ts-loader",
+            loader: 'ts-loader',
             options: {
-              configFile: "tsconfig.json",
-            },
-          },
-        ],
+              configFile: 'tsconfig.json'
+            }
+          }
+        ]
       },
       {
         test: /\.(sa|sc|c)ss$/,
         use: [
           {
-            loader: MiniCssExtractPlugin.loader, // 抽取样式文件，将css样式文件用link标签引入，使用此loader就不需要用style-loader，即使用了也不会有效果
+            loader: MiniCssExtractPlugin.loader // 抽取样式文件，将css样式文件用link标签引入，使用此loader就不需要用style-loader，即使用了也不会有效果
           },
           {
-            loader: "css-loader",
+            loader: 'css-loader',
             options: {
               modules: {
                 auto: true,
                 localIdentName: devMode
-                  ? "[path][name]__[local]"
-                  : "[hash:base64:5]",
+                  ? '[path][name]__[local]'
+                  : '[hash:base64:5]'
               },
-              importLoaders: 2, // 一个css中引入了另一个css，也会执行之前两个loader，即postcss-loader和sass-loader
-            },
+              importLoaders: 2 // 一个css中引入了另一个css，也会执行之前两个loader，即postcss-loader和sass-loader
+            }
           },
           {
             // 使用 postcss 为 css 加上浏览器前缀
-            loader: "postcss-loader",
+            loader: 'postcss-loader',
             options: {
               // options has an unknown property 'plugins';
               postcssOptions: {
                 // PostCSS plugin autoprefixer requires PostCSS 8.将autoprefixer降到8.0.0版本
-                plugins: [require("autoprefixer")],
-              },
-            },
+                plugins: [require('autoprefixer')]
+              }
+            }
           },
           {
-            loader: "sass-loader", // 使用 sass-loader 将 scss 转为 css
-          },
-        ],
+            loader: 'sass-loader' // 使用 sass-loader 将 scss 转为 css
+          }
+        ]
       },
       {
         test: /(\.(eot|ttf|woff|woff2)|font)$/,
-        loader: "file-loader",
-        options: { outputPath: "fonts/" },
+        loader: 'file-loader',
+        options: { outputPath: 'fonts/' }
       },
       {
         test: /\.(png|jpg|gif|svg|jpeg)$/,
-        loader: "file-loader",
-        options: { outputPath: "images/" },
-      },
-    ],
+        loader: 'file-loader',
+        options: { outputPath: 'images/' }
+      }
+    ]
   },
   plugins: [
     // new CleanWebpackPlugin(),
@@ -92,7 +92,7 @@ module.exports = {
       {
         contextRegExp: /^\.\/locale$/,
         resourceRegExp: /moment$/
-      },
+      }
     ),
     // 主要用于对打包好的js文件的最开始处添加版权声明
     new webpack.BannerPlugin(`cookie ${pkg.version}`),
@@ -100,9 +100,9 @@ module.exports = {
     new MiniCssExtractPlugin({
       // Options similar to the same options in webpackOptions.output
       // both options are optional
-      filename: devMode ? "cookie.css" : "cookie.min.css",
-      chunkFilename: "[id].css",
-    }),
+      filename: devMode ? 'cookie.css' : 'cookie.min.css',
+      chunkFilename: '[id].css'
+    })
     // devMode ? new webpack.HotModuleReplacementPlugin() : null
   ],
   optimization: {
@@ -118,20 +118,20 @@ module.exports = {
           // webpack v5 使用内置的TerserJSPlugin替代UglifyJsPlugin，因为UglifyJsPlugin不支持ES6
           new TerserJSPlugin({
             // cache: true, // 启用文件缓存并设置缓存目录的路径
-            parallel: true, // 使用多进程并行运行
+            parallel: true // 使用多进程并行运行
             // sourceMap: true // set to true if you want JS source maps
           }),
           // 用于优化或者压缩CSS资源
           new OptimizeCSSAssetsPlugin({
             assetNameRegExp: /\.css$/g,
-            cssProcessor: require("cssnano"), // 用于优化\最小化 CSS 的 CSS 处理器，默认为 cssnano
+            cssProcessor: require('cssnano'), // 用于优化\最小化 CSS 的 CSS 处理器，默认为 cssnano
             cssProcessorOptions: {
               safe: true,
-              discardComments: { removeAll: true },
+              discardComments: { removeAll: true }
             }, // 传递给 cssProcesso
-            canPrint: true, // 布尔值，指示插件是否可以将消息打印到控制台，默认为 true
-          }),
+            canPrint: true // 布尔值，指示插件是否可以将消息打印到控制台，默认为 true
+          })
         ],
-    sideEffects: false,
-  },
-};
+    sideEffects: false
+  }
+}
