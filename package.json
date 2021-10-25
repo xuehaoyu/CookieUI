@@ -10,7 +10,8 @@
     "build:dev": "cross-env NODE_ENV=development webpack",
     "build:prod": "cross-env NODE_ENV=production webpack",
     "build:tsc": "tsc -p tsconfig.build.json --target ES5 --outDir lib",
-    "build": "npm run clean && npm run build:prod && npm run build:dev && npm run build:tsc"
+    "build:es": "cpr components/styles lib/styles -o && cpr components/assets lib/assets -o",
+    "build": "npm run clean && npm run build:prod && npm run build:dev && npm run build:tsc && npm run build:es"
   },
   "repository": {
     "type": "git",
@@ -42,6 +43,7 @@
     "@typescript-eslint/parser": "^5.1.0",
     "autoprefixer": "^10.3.7",
     "babel-loader": "^8.2.3",
+    "cpr": "^3.0.1",
     "cross-env": "^7.0.3",
     "css-loader": "^6.4.0",
     "css-minimizer-webpack-plugin": "^3.1.1",

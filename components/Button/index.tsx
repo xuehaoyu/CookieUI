@@ -1,7 +1,5 @@
 import React from 'react'
 import classNames from 'classnames'
-import './index.scss'
-
 export interface IButtonProps {
   onClick?: React.MouseEventHandler;
   // 类型
