@@ -1,5 +1,6 @@
 import React from 'react'
 import classNames from 'classnames'
+import './index.scss'
 
 export interface IButtonProps {
   onClick?: React.MouseEventHandler;
@@ -75,28 +76,28 @@ const Button: React.FC = (props: IButtonProps) => {
 
   const className = classNames(
     {
-      'br-button': true,
-      'br-button-primary': primary,
-      'br-button-secondary': secondary && !text,
-      'br-button-outline': outline,
-      'br-button-dashed': dashed,
-      'br-button-link': link,
-      'br-button-text': text && !secondary,
-      'br-button-text-secondary': secondary && text,
-      'br-button-round': round,
-      'br-button-rectangle': noRadius,
-      'br-button-fat': fat,
-      'br-button-xl': xLarge,
-      'br-button-lg': large,
-      'br-button-sm': small,
-      'br-button-xs': xSmall,
-      'br-button-xxs': xxSmall,
-      'br-button-long': long,
-      'br-button-short': short,
-      'br-button-success': success,
-      'br-button-warn': warn,
-      'br-button-danger': danger,
-      'br-button-disabled': disabled
+      'cxu-button': true,
+      'cxu-button-primary': primary,
+      'cxu-button-secondary': secondary && !text,
+      'cxu-button-outline': outline,
+      'cxu-button-dashed': dashed,
+      'cxu-button-link': link,
+      'cxu-button-text': text && !secondary,
+      'cxu-button-text-secondary': secondary && text,
+      'cxu-button-round': round,
+      'cxu-button-rectangle': noRadius,
+      'cxu-button-fat': fat,
+      'cxu-button-xl': xLarge,
+      'cxu-button-lg': large,
+      'cxu-button-sm': small,
+      'cxu-button-xs': xSmall,
+      'cxu-button-xxs': xxSmall,
+      'cxu-button-long': long,
+      'cxu-button-short': short,
+      'cxu-button-success': success,
+      'cxu-button-warn': warn,
+      'cxu-button-danger': danger,
+      'cxu-button-disabled': disabled
     },
     tempClassName
   )
@@ -108,7 +109,7 @@ const Button: React.FC = (props: IButtonProps) => {
       style={style}
       onClick={onClick}
       disabled={disabled}>
-      <span className='pony-button__content'>{children}</span>
+      <span className='cxu-button-content'>{children}</span>
     </button>
   )
 }
